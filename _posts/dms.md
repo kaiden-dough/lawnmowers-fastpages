@@ -1,3 +1,11 @@
+---
+toc: true
+comments: true
+layout: post
+categories: [markdown]
+title: Test
+---
+
 <!DOCTYPE HTML>
 
 <style>
