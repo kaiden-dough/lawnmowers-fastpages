@@ -4,8 +4,48 @@ search_exclude: true
 image: images/logo.png
 ---
 
-<p><i>LAWNMOWERS ARCADE</i></p>
-
 {% include navbarsubmenu.html %}
 
-# Posts
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    .parallax {
+
+        background-image: url("{{site.baseurl}}/images/jj.jpg");
+        min-height: 500px; 
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 400px 400px;
+      }
+    h1 {color:rgb(122, 122, 122); font-family: brush script mt; font-size: 50px;}
+    h3 {color:rgb(122, 122, 122); font-family: brush script mt; font-size: 40px;}
+    h2 {color:rgb(122, 122, 122); font-family: brush script mt; font-size: 30px;}
+    #grad2 {
+        height: 150px;
+        width: 200px;
+        background-image: radial-gradient(circle, white, yellow, green);
+      }
+</style>
+</head>
+<body style="background-image: id = grad2;">
+    <h1 align="center">
+        <b>
+            LAWNMOWERS ARCADE
+        </b>
+    </h1>
+    <div class="parallax"></div>
+    <h2>
+        <b>
+            For more information visit the "About" page!
+        </b>
+    </h2>
+    <div class="parallax2"></div>
+    <h3>
+        <b>
+            Blogs
+        </b>
+    </h3>
+</body>
+</html>
