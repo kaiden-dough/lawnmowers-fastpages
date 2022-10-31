@@ -109,7 +109,7 @@ window.onload = wrap_img;
 	<meta charset="UTF-8">
 	<title>Pong</title>
 
-<!-- css portion -->
+<!-- css/style portion -->
 
 	<style>
 	canvas {
@@ -126,15 +126,21 @@ window.onload = wrap_img;
 <body>
 <script>
 
-// variables and constants, utilizing math
+// variables and constants, utilizing math and javascript
 	
 var
+
+// dimensions of the overall game
 
 WIDTH  = 1540,
 HEIGHT = 530,
 
 pi = Math.PI,
 
+// you can use both arrows or w/s
+
+UKey   = 38,
+DKey = 40,
 WKey   = 87,
 SKey = 83,
 
@@ -156,6 +162,8 @@ player = {
 	update: function() {
 		if (keystate[WKey]) this.y -= 7;
 		if (keystate[SKey]) this.y += 7;
+        if (keystate[UKey]) this.y -= 7;
+		if (keystate[DKey]) this.y += 7;
 		this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
 	},
 
@@ -205,49 +213,40 @@ ball = {
 		var r = Math.random();
 		this.x = side===1 ? player.x+player.width : ai.x - this.side;
 		this.y = (HEIGHT - this.side)*r;
-		// calculate out-angle, higher/lower on the y-axis =>
-		// steeper angle
+		// calculating resultant angles
 		var phi = 0.1*pi*(1 - 2*r);
-		// set velocity direction and magnitude
+		// using speed and velocity properties to match with angles
 		this.vel = {
 			x: side*this.speed*Math.cos(phi),
 			y: this.speed*Math.sin(phi)
 		}
 	},
 
-	/**
-	 * Update the ball position and keep it within the canvas
-	 */
+	// Update the ball position and keep it within the canvas
 	update: function() {
-		// update position with current velocity
+		// match position and velocity
 		this.x += this.vel.x;
 		this.y += this.vel.y;
 		// check if out of the canvas in the y direction
 		if (0 > this.y || this.y+this.side > HEIGHT) {
-			// calculate and add the right offset, i.e. how far
-			// inside of the canvas the ball is
 			var offset = this.vel.y < 0 ? 0 - this.y : HEIGHT - (this.y+this.side);
 			this.y += 2*offset;
-			// mirror the y velocity
+			// mirroring velocity
 			this.vel.y *= -1;
 		}
-		// helper function to check intesectiont between two
-		// axis aligned bounding boxex (AABB)
 		var AABBIntersect = function(ax, ay, aw, ah, bx, by, bw, bh) {
 			return ax < bx+bw && ay < by+bh && bx < ax+aw && by < ay+ah;
 		};
 
-		// check againts target paddle to check collision in x
-		// direction
 		var pdle = this.vel.x < 0 ? player : ai;
 		if (AABBIntersect(pdle.x, pdle.y, pdle.width, pdle.height,
 				this.x, this.y, this.side, this.side)
 		) {	
-			// set the x position and calculate reflection angle
+			// calculate resultant angle (reflection)
 			this.x = pdle===player ? player.x+player.width : ai.x - this.side;
 			var n = (this.y+this.side - pdle.y)/(pdle.height+this.side);
-			var phi = 0.25*pi*(2*n - 1); // pi/4 = 45
-			// calculate smash value and update velocity
+			var phi = 0.25*pi*(2*n - 1);
+			// update valocity
 			var smash = Math.abs(phi) > 0.2*pi ? 1.5 : 1;
 			this.vel.x = smash*(pdle===player ? 1 : -1)*this.speed*Math.cos(phi);
 			this.vel.y = smash*this.speed*Math.sin(phi);
@@ -260,19 +259,15 @@ ball = {
 		}
 	},
 
-	/**
-	 * Draw the ball to the canvas
-	 */
+	// Draw the ball to the canvas
 	draw: function() {
 		ctx.fillRect(this.x, this.y, this.side, this.side);
 	}
 };
 
-/**
- * Starts the game
- */
+// game initialization functions
 function main() {
-	// create, initiate and append game canvas
+	// create game canvas
 	canvas = document.createElement("canvas");
 	canvas.width = WIDTH;
 	canvas.height = HEIGHT;
@@ -300,9 +295,7 @@ function main() {
 	window.requestAnimationFrame(loop, canvas);
 }
 
-/**
- * Initatite game objects and set start positions
- */
+// set start positions
 function init() {
 	player.x = player.width;
 	player.y = (HEIGHT - player.height)/2;
@@ -313,34 +306,30 @@ function init() {
 	ball.serve(1);
 }
 
-/**
- * Update all game objects
- */
+// update the entire game
 function update() {
 	ball.update();
 	player.update();
 	ai.update();
 }
 
-/**
- * Clear canvas and draw all game objects and net
- */
+// Clear canvas and draw all game objects and net
 function draw() {
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
 	ctx.save();
 
-	ctx.fillStyle = "#fff";
+	ctx.fillStyle = "#00ff00";
 
 	ball.draw();
 	player.draw();
 	ai.draw();
 
-	// draw the net
+	// vertical line in the middle
 	var w = 4;
 	var x = (WIDTH - w)*0.5;
 	var y = 0;
-	var step = HEIGHT/20; // how many net segments
+	var step = HEIGHT/30; // how many net segments
 	while (y < HEIGHT) {
 		ctx.fillRect(x, y+step*0.25, w, step*0.5);
 		y += step;
