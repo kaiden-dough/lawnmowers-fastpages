@@ -99,12 +99,11 @@ window.onload = wrap_img;
 
   <div class="post-content e-content" itemprop="articleBody">
     <!doctype html>
-<body style="background-image: radial-gradient(circle, rgb(255, 255, 255) 50%, rgb(255, 255, 255));">
+<body style="background-image: repeating-conic-gradient(rgb(0, 255, 26) 10%, yellow 20%);">
 <head>
 	<meta charset="UTF-8">
-	<title>Pong</title>
 
-<!-- css/style portion -->
+	<!-- css/style portion -->
 
 	<style>
 	canvas {
@@ -112,9 +111,10 @@ window.onload = wrap_img;
 		position: absolute;
 		margin: auto;
 		top: 0;
-		bottom: 0;
+		bottom: 120px;
 		left: 0;
 		right: 0;
+		border: 8px double blue
 	}
 	</style>
 </head>
@@ -127,8 +127,8 @@ var
 
 // dimensions of the overall game
 
-WIDTH  = 1540,
-HEIGHT = 530,
+WIDTH  = 1000,
+HEIGHT = 400,
 
 pi = Math.PI,
 
@@ -195,7 +195,7 @@ ball = {
 	vel: null,
 
 	side:  20,
-	speed: 12,
+	speed: 6,
 
 	/**
 	 * Serves the ball towards the specified side
@@ -314,7 +314,7 @@ function draw() {
 
 	ctx.save();
 
-	ctx.fillStyle = "#00ff00";
+	ctx.fillStyle = "#0000ff";
 
 	ball.draw();
 	player.draw();
