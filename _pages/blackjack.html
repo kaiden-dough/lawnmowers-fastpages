@@ -1,0 +1,330 @@
+---
+layout: post
+permalink: /blackjack/
+title: Blackjack
+---
+
+<body style="background-image: radial-gradient(circle, green 50%, green);">
+    <div class="px-5 py-5 mx-auto">
+    </div>
+</body>
+
+  <!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <!-- formatting --> 
+  <style>
+      .body { 
+          font-family:Arial, Helvetica, sans-serif;
+          text-align: center;
+      }
+      .button {
+          width: 100px;
+          height: 50px;
+          font-family: Arial,Helvetica,sans-serif;
+          font-size: 20px;
+      }
+      #dealer-cards img {
+          height: 175px;
+          width: 125px;
+          margin: 1px;
+      }
+      #your-cards img {
+          height: 175px;
+          width: 125px;
+          margin: 1px;
+      }
+    </style>
+    <!-- frontend stuff -->
+  <body class="body">
+      <button class="button" id="up" width="100" height="50">+</button>
+      <h2>
+          Bet: <span id="bet"><span>
+      </h2>
+      <button class="button" id="down" width="100" height="50">-</button>
+      <h2>
+          Score: <span id="score"><span>
+      </h2>
+      <h2>
+          Dealer: <span id="dealer-sum"><span>
+      </h2>
+      <!-- dealer's cards -->
+      <div id="dealer-cards">
+          <img id="hidden" src="{{site.baseurl}}//images/cards/BACK.png">
+      </div>
+
+      <br>
+
+      <h2>
+          You: <span id="your-sum"></span>
+      </h2>
+      <!-- player's cards -->
+      <div id="your-cards">
+
+      </div>
+
+      <br>
+      <!-- hit and stand buttons -->
+      <button class="button" id="hit" width="100" height="50">Hit</button>
+      <button class="button" id="stand" width="100" height="50">Stand</button>
+      <!-- who wins -->
+      <p id="results"></p>
+      <br>
+      <button class="button" id="reset" width="100" height="50">Reset</button>
+  </body>
+</html> 
+
+<script>
+  // global variables: sums of cards
+  var dealerSum = 0;
+  var yourSum = 0;
+  //if they have an ace, used later to see if it would be counted as 1 or 11
+  var dealerAce = 0;
+  var yourAce = 0; 
+  // dealer's hidden card
+  var hidden;
+  // deck for the round
+  var deck;
+  // if the player sum is less than 21
+  var canHit = true;
+  var bet = 100;
+  var score = 0;
+  var canBet = true;
+
+  // load in functions, game set up
+  window.onload = function() {
+      document.getElementById("bet").innerText = bet;
+      document.getElementById("score").innerText = score;
+      reset();
+      betFunction();
+      
+  }
+
+  function betFunction() {
+      let betted = false;
+      document.getElementById("up").addEventListener("click", up);
+      document.getElementById("down").addEventListener("click", down);
+      document.getElementById("reset").addEventListener("click", reset);
+      
+      bet = document.getElementById('bet').innerText;
+      sco = document.getElementById('score').innerText;
+      console.log("bet"+bet+"score"+sco);
+
+      if (betted = true) {
+          buildDeck();
+          shuffleDeck();
+          startGame();
+      }
+  }
+
+  function up(){
+      if (!canBet) {
+          return;
+      }
+      if ((parseInt(bet)<500) && (canBet = true)){
+          bet = parseInt(bet) + 50
+      }
+      document.getElementById("bet").innerText = bet;
+  }
+
+  function down(){
+      if (!canBet) {
+          return;
+      }
+      if ((parseInt(bet)>50)){
+          bet = parseInt(bet) - 50
+      }
+      document.getElementById("bet").innerText = bet;
+  }
+
+  function reset(){
+      //location.reload();
+      dealerSum = 0;
+      yourSum = 0;
+      dealerAce = 0;
+      yourAce = 0; 
+      hidden;
+      deck;
+      canHit = true;
+      canBet = true;
+      document.getElementById("results").innerText = "";
+      document.getElementById("dealer-sum").innerText = "";
+      document.getElementById("your-sum").innerText = "";       
+        
+  }
+
+  // the deck, no shuffled
+  function buildDeck() {
+      let num = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+      let suit = ["C", "D", "H", "S"];
+      deck = [];
+
+      // combining the number and suit
+      for (let s=0; s < suit.length; s++) {
+          for (let n=0; n < num.length; n++) {
+              deck.push(num[n]+"-"+suit[s]); // "-" because that is how the image names are formatted
+          }
+      }
+      console.log(deck);
+  }
+
+  // shuffling the deck, making a randomized deck
+  function shuffleDeck() {
+      for (var c = deck.length - 1; c > 0; c--) {
+          var r = Math.floor(Math.random() * (c + 1));
+          var tempdeck = deck[c];
+          deck[c] = deck[r];
+          deck[r] = tempdeck;
+      }
+      console.log(deck);
+  }
+
+  
+  function startGame() {
+      hidden = deck.pop(); //takes the last of the array and removes it to not reuse cards
+      console.log("Dealerhidden:"+hidden);
+      dealerSum += cardValue(hidden);
+      dealerAce += aceCheck(hidden);
+
+      for (let i = 0; i < 1; i++) {
+          let cardImg = document.createElement("img");
+          let card = deck.pop();
+          console.log("Dealer:"+card);
+          test = ("{{site.baseurl}}//images/cards/"+card+".png");
+          add = "{"+test+"}";
+          console.log(JSON.stringify(add));
+          cardImg.src = (JSON.stringify(add));
+          dealerSum += cardValue(card);
+          dealerAce += aceCheck(card);
+          document.getElementById("dealer-cards").append(cardImg);
+      }
+      console.log("Dealer:"+dealerSum);
+
+      for (let i = 0; i < 2; i++) {
+          let cardImg = document.createElement("img");
+          let card = deck.pop();
+          console.log("Player:"+card);
+          test = ("{{site.baseurl}}//images/cards/"+card+".png");
+          add = "{"+test+"}";
+          console.log(JSON.stringify(add));
+          cardImg.src = (JSON.stringify(add));
+          yourSum += cardValue(card);
+          yourAce += aceCheck(card);
+          document.getElementById("your-cards").append(cardImg);
+      }
+      console.log("Player:"+yourSum);
+      document.getElementById("hit").addEventListener("click", hit);
+      document.getElementById("stand").addEventListener("click", stand);
+      document.getElementById("reset").addEventListener("click", reset);
+  }
+
+  function hit() {
+      canBet = false;
+      console.log(canBet);
+      //alert("hit") //see if the button works
+      if (!canHit) { //if cannot hit then it doesn't let you
+          return; 
+      }
+      else {
+          let cardImg = document.createElement("img");
+          let card = deck.pop();
+          console.log("Player:"+card);
+          test = ("{{site.baseurl}}//images/cards/"+card+".png");
+          add = "{"+test+"}";
+          console.log(JSON.stringify(add));
+          cardImg.src = (JSON.stringify(add));
+          yourSum += cardValue(card);
+          yourAce += aceCheck(card);
+          document.getElementById("your-cards").append(cardImg);
+      }
+      
+
+      if (reduceAce(yourSum, yourAce)>21) {
+          canHit = false;
+      }
+      console.log("Player:"+reduceAce(yourSum, yourAce));
+  }
+  function stand() {
+      canBet = true;
+      console.log(canBet);
+      while (dealerSum < 17) { //dealer must keep hitting if sum is less than 17
+          let cardImg = document.createElement("img"); // this was supposed to make new cards appear
+          let card = deck.pop();
+          console.log("Dealer:"+card);
+          console.log(card);            
+          test = ("{{site.baseurl}}//images/cards/"+card+".png");
+          add = "{"+test+"}";
+          console.log(JSON.stringify(add));
+          cardImg.src = (JSON.stringify(add)); // did not work though, it kept on switching the symbols to ASCII symbols
+          // also in the terminal on vscode said that is was GET and I am confused
+
+          dealerSum += cardValue(card);
+          dealerAce += aceCheck(card);
+          document.getElementById("dealer-cards").append(cardImg); //supposed to add the card onto the screen
+      }
+      console.log("Dealer:"+dealerSum);
+
+      dealerSum = reduceAce(dealerSum, dealerAce);
+      yourSum = reduceAce(yourSum, yourAce);
+
+      canHit = false;
+      document.getElementById("hidden").src = "{{site.baseurl}}//images/cards/"+hidden+".png";
+
+      let message = "";
+      if (yourSum > 21) { //over 21 u lose
+          message = "You Lose!";
+          score -= parseInt(bet);
+      }
+      else if (dealerSum > 21) { //dealer over, but you not u win
+          message = "You win!";
+          score += parseInt(bet);
+      }
+      else if (yourSum == dealerSum) { // if both equal 21, a tie
+          message = "Tie!";
+      }
+      else if (yourSum > dealerSum) { // not above or 21, and greater than dealer = u win
+          message = "You Win!";
+          score += parseInt(bet);
+      }
+      else if (yourSum < dealerSum) { // below dealer, u lose
+          message = "You Lose!";
+          score -= parseInt(bet);
+      }
+      console.log(message);
+      document.getElementById("dealer-sum").innerText = dealerSum; //display score and sums
+      document.getElementById("your-sum").innerText = yourSum;
+      document.getElementById("results").innerText = message;
+      document.getElementById("score").innerText = score;
+      //alert("stand") //see if the button works
+  }
+
+  function reduceAce(sum, ace) {
+      while (sum > 21 && ace > 0) {
+          sum -= 10;
+          ace -= 1;
+      }
+      return sum;
+  }
+
+  function cardValue(card) { // gets the value of the card
+      let cardData = card.split("-"); // converts to an array Ex: ["5", "D"], rid of "-"
+      let value = cardData[0]; // takes only the first item
+
+      if(isNaN(value)) { //if it is not a number, so it is either J, Q, K, or A
+          if (value=="A"){ // if it is an ace
+              return 11; //set the value as 11 for now
+          }
+          return 10; //else, the value is 10 because it is J, Q, K
+      }
+      return parseInt(value); // it is a number, so just return the number
+  }
+  
+  function aceCheck(card) { //check if they have an Ace
+      if(card[0] == "A") {
+          return 1; // for later use to determine if the ace is 1 or 11
+      }
+      return 0;
+  }

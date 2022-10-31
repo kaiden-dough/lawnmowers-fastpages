@@ -1,0 +1,61 @@
+---
+layout: post
+permalink: /jokebox/
+title: Jokebox
+---
+
+<html>
+    <head>
+        <style>
+        h1 {
+          border: 5px solid rgb(0, 0, 0);
+          padding: 20px;
+          text-align: center;
+          color: #356d22;
+        }
+
+        button {
+            background-color: #356d22;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            display: block;
+            font-size: 50px;
+            cursor: pointer;
+            width: 900px;
+            padding: 10px
+        }
+
+        /* Green */
+        .success {
+            border-color: #04AA6D;
+        }
+
+        .success:hover {
+            background-color: #068959;
+            color: #ffffff;
+        }
+
+        </style>
+    </head>
+    <body>
+        <script>
+            fetch('https://lawnmowers.nighthawkcodescrums.gq/api/jokes/')
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+            console.log(response.json())
+            function displayJoke() {
+                document.getElementById("djb").innerHTML = "test";
+            }
+
+        </script>
+        
+        <div>
+    
+        
+        <button class="button success" onclick="displayJoke()">Play</button>
+
+        <p id="djb"></p>
+
+        </div>
+    </body>
+</html>
