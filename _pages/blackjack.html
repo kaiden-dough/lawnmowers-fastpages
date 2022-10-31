@@ -4,9 +4,8 @@ permalink: /blackjack/
 title: Blackjack
 ---
 
-<body style="background-color:green;"> <!-- green background and title -->
+<body style="background-image: radial-gradient(circle, green 50%, green);">
     <div class="px-5 py-5 mx-auto">
-        <h1 style="color:white;"><strong>Blackjack</strong></h1>
     </div>
 </body>
 
@@ -54,7 +53,7 @@ title: Blackjack
       </h2>
       <!-- dealer's cards -->
       <div id="dealer-cards">
-          <img id="hidden" src="{{site.baseurl}}//images/BACK.png">
+          <img id="hidden" src="{{site.baseurl}}//images/cards/BACK.png">
       </div>
 
       <br>
@@ -194,7 +193,7 @@ title: Blackjack
           let cardImg = document.createElement("img");
           let card = deck.pop();
           console.log("Dealer:"+card);
-          test = ("{{site.baseurl}}//images/"+card+".png");
+          test = ("{{site.baseurl}}//images/cards/"+card+".png");
           add = "{"+test+"}";
           console.log(JSON.stringify(add));
           cardImg.src = (JSON.stringify(add));
@@ -208,7 +207,7 @@ title: Blackjack
           let cardImg = document.createElement("img");
           let card = deck.pop();
           console.log("Player:"+card);
-          test = ("{{site.baseurl}}//images/"+card+".png");
+          test = ("{{site.baseurl}}//images/cards/"+card+".png");
           add = "{"+test+"}";
           console.log(JSON.stringify(add));
           cardImg.src = (JSON.stringify(add));
@@ -233,7 +232,7 @@ title: Blackjack
           let cardImg = document.createElement("img");
           let card = deck.pop();
           console.log("Player:"+card);
-          test = ("{{site.baseurl}}//images/"+card+".png");
+          test = ("{{site.baseurl}}//images/cards/"+card+".png");
           add = "{"+test+"}";
           console.log(JSON.stringify(add));
           cardImg.src = (JSON.stringify(add));
@@ -256,7 +255,7 @@ title: Blackjack
           let card = deck.pop();
           console.log("Dealer:"+card);
           console.log(card);            
-          test = ("{{site.baseurl}}//images/"+card+".png");
+          test = ("{{site.baseurl}}//images/cards/"+card+".png");
           add = "{"+test+"}";
           console.log(JSON.stringify(add));
           cardImg.src = (JSON.stringify(add)); // did not work though, it kept on switching the symbols to ASCII symbols
@@ -272,7 +271,7 @@ title: Blackjack
       yourSum = reduceAce(yourSum, yourAce);
 
       canHit = false;
-      document.getElementById("hidden").src = "{{site.baseurl}}//images/"+hidden+".png";
+      document.getElementById("hidden").src = "{{site.baseurl}}//images/cards/"+hidden+".png";
 
       let message = "";
       if (yourSum > 21) { //over 21 u lose
