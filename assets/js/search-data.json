@@ -29,7 +29,7 @@
   
       ,"page2": {
           "title": "Blackjack",
-          "content": "&lt;!DOCTYPE html&gt; . . + Bet: &lt;/h2&gt; - Score: &lt;/h2&gt; Dealer: &lt;/h2&gt; You: . Hit Stand . Reset &lt;/body&gt; &lt;/html&gt; .",
+          "content": "&lt;!DOCTYPE html&gt; . . Bet: &lt;--&gt; Score: . + - Dealer: &lt;/h2&gt; You: . Hit Stand . Reset &lt;/body&gt; &lt;/html&gt; .",
           "url": "https://kaiden-dough.github.io/lawnmowers-fastpages/blackjack/",
           "relUrl": "/blackjack/",
           "date": ""
