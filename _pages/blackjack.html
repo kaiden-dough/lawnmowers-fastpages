@@ -27,12 +27,19 @@ title: Blackjack
           font-family: Arial,Helvetica,sans-serif;
           font-size: 20px;
       }
+      .container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
       #dealer-cards img {
+          
           height: 175px;
           width: 125px;
           margin: 1px;
       }
       #your-cards img {
+          
           height: 175px;
           width: 125px;
           margin: 1px;
@@ -52,9 +59,11 @@ title: Blackjack
           Dealer: <span id="dealer-sum"><span>
       </h2>
       <!-- dealer's cards -->
-      <div id="dealer-cards">
-          <img id="hidden" src="{{site.baseurl}}//images/cards/BACK.png">
+      <div class = "container" id="dealer-cards">
+        <img id="hidden" src="http://kaiden-dough.github.io/lawnmowers-fastpages//images/cards/BACK.png">
       </div>
+
+      
 
       <br>
 
@@ -62,7 +71,7 @@ title: Blackjack
           You: <span id="your-sum"></span>
       </h2>
       <!-- player's cards -->
-      <div id="your-cards">
+      <div class="container" id="your-cards">
 
       </div>
 
@@ -93,68 +102,97 @@ title: Blackjack
   var bet = 100;
   var score = 0;
   var canBet = true;
-
+  var dealercard;
+  var playercard;
+  var dealernum;
+  var playernum;
+  
   // load in functions, game set up
   window.onload = function() {
-      document.getElementById("bet").innerText = bet;
-      document.getElementById("score").innerText = score;
-      reset();
-      betFunction();
-      
-  }
+    document.getElementById("bet").innerText = bet;
+    document.getElementById("score").innerText = score;
+    dealerSum = 0;
+    yourSum = 0;
+    dealerAce = 0;
+    yourAce = 0; 
+    hidden;
+    deck;
+    canHit = true;
+    canBet = true;
+    document.getElementById("results").innerText = "";
+    document.getElementById("dealer-sum").innerText = "";
+    document.getElementById("your-sum").innerText = "";
+    betFunction();
+    buildDeck();
+    shuffleDeck();
+    startGame();
+}
 
-  function betFunction() {
-      let betted = false;
-      document.getElementById("up").addEventListener("click", up);
-      document.getElementById("down").addEventListener("click", down);
-      document.getElementById("reset").addEventListener("click", reset);
-      
-      bet = document.getElementById('bet').innerText;
-      sco = document.getElementById('score').innerText;
-      console.log("bet"+bet+"score"+sco);
+function betFunction() {
+    document.getElementById("up").addEventListener("click", up);
+    document.getElementById("down").addEventListener("click", down);
+    document.getElementById("reset").addEventListener("click", reset);
+    
+    bet = document.getElementById('bet').innerText;
+    sco = document.getElementById('score').innerText;
+    console.log("bet"+bet+"score"+sco);
 
-      if (betted = true) {
-          buildDeck();
-          shuffleDeck();
-          startGame();
-      }
-  }
+    
+}
 
-  function up(){
-      if (!canBet) {
-          return;
-      }
-      if ((parseInt(bet)<500) && (canBet = true)){
-          bet = parseInt(bet) + 50
-      }
-      document.getElementById("bet").innerText = bet;
-  }
+function up(){
+    if (!canBet) {
+        return;
+    }
+    if ((parseInt(bet)<500) && (canBet = true)){
+        bet = parseInt(bet) + 50
+    }
+    document.getElementById("bet").innerText = bet;
+}
 
-  function down(){
-      if (!canBet) {
-          return;
-      }
-      if ((parseInt(bet)>50)){
-          bet = parseInt(bet) - 50
-      }
-      document.getElementById("bet").innerText = bet;
-  }
+function down(){
+    if (!canBet) {
+        return;
+    }
+    if ((parseInt(bet)>50)){
+        bet = parseInt(bet) - 50
+    }
+    document.getElementById("bet").innerText = bet;
+}
 
-  function reset(){
-      //location.reload();
-      dealerSum = 0;
-      yourSum = 0;
-      dealerAce = 0;
-      yourAce = 0; 
-      hidden;
-      deck;
-      canHit = true;
-      canBet = true;
-      document.getElementById("results").innerText = "";
-      document.getElementById("dealer-sum").innerText = "";
-      document.getElementById("your-sum").innerText = "";       
-        
-  }
+function reset(){
+    //location.reload();
+    dealerSum = 0;
+    yourSum = 0;
+    
+    dealerAce = 0;
+    yourAce = 0; 
+    hidden;
+    deck;
+    canHit = true;
+    canBet = true;
+    document.getElementById("results").innerText = "";
+    document.getElementById("dealer-sum").innerText = "";
+    document.getElementById("your-sum").innerText = "";
+    
+    dealercard = document.getElementById('dealer-cards');
+    console.log(dealercard);
+    dealernum = dealercard.childElementCount;
+    while(dealernum != 1){
+        dealercard.removeChild(dealercard.lastChild);
+        dealernum = dealercard.childElementCount; 
+    }       
+    playercard = document.getElementById('your-cards');
+    playernum = playercard.childElementCount;
+    while(playernum != 0){
+        playercard.removeChild(playercard.lastChild);
+        playernum = playercard.childElementCount; 
+    }    
+    buildDeck();
+    shuffleDeck();
+    startGame();
+}
+
 
   // the deck, no shuffled
   function buildDeck() {
@@ -193,10 +231,7 @@ title: Blackjack
           let cardImg = document.createElement("img");
           let card = deck.pop();
           console.log("Dealer:"+card);
-          test = ("{{site.baseurl}}//images/cards/"+card+".png");
-          add = "{"+test+"}";
-          console.log(JSON.stringify(add));
-          cardImg.src = (JSON.stringify(add));
+          cardImg.src = "http://kaiden-dough.github.io/lawnmowers-fastpages//images/cards/"+card+".png";
           dealerSum += cardValue(card);
           dealerAce += aceCheck(card);
           document.getElementById("dealer-cards").append(cardImg);
@@ -207,10 +242,7 @@ title: Blackjack
           let cardImg = document.createElement("img");
           let card = deck.pop();
           console.log("Player:"+card);
-          test = ("{{site.baseurl}}//images/cards/"+card+".png");
-          add = "{"+test+"}";
-          console.log(JSON.stringify(add));
-          cardImg.src = (JSON.stringify(add));
+          cardImg.src = "http://kaiden-dough.github.io/lawnmowers-fastpages//images/cards/"+card+".png";
           yourSum += cardValue(card);
           yourAce += aceCheck(card);
           document.getElementById("your-cards").append(cardImg);
@@ -232,10 +264,7 @@ title: Blackjack
           let cardImg = document.createElement("img");
           let card = deck.pop();
           console.log("Player:"+card);
-          test = ("{{site.baseurl}}//images/cards/"+card+".png");
-          add = "{"+test+"}";
-          console.log(JSON.stringify(add));
-          cardImg.src = (JSON.stringify(add));
+          cardImg.src = "http://kaiden-dough.github.io/lawnmowers-fastpages//images/cards/"+card+".png";
           yourSum += cardValue(card);
           yourAce += aceCheck(card);
           document.getElementById("your-cards").append(cardImg);
@@ -253,12 +282,8 @@ title: Blackjack
       while (dealerSum < 17) { //dealer must keep hitting if sum is less than 17
           let cardImg = document.createElement("img"); // this was supposed to make new cards appear
           let card = deck.pop();
-          console.log("Dealer:"+card);
-          console.log(card);            
-          test = ("{{site.baseurl}}//images/cards/"+card+".png");
-          add = "{"+test+"}";
-          console.log(JSON.stringify(add));
-          cardImg.src = (JSON.stringify(add)); // did not work though, it kept on switching the symbols to ASCII symbols
+          console.log("Dealer:"+card); 
+          cardImg.src = "http://kaiden-dough.github.io/lawnmowers-fastpages//images/cards/"+card+".png"; // did not work though, it kept on switching the symbols to ASCII symbols
           // also in the terminal on vscode said that is was GET and I am confused
 
           dealerSum += cardValue(card);
@@ -271,7 +296,7 @@ title: Blackjack
       yourSum = reduceAce(yourSum, yourAce);
 
       canHit = false;
-      document.getElementById("hidden").src = "{{site.baseurl}}//images/cards/"+hidden+".png";
+      document.getElementById("hidden").src = "http://kaiden-dough.github.io/lawnmowers-fastpages//images/cards/"+hidden+".png";
 
       let message = "";
       if (yourSum > 21) { //over 21 u lose
@@ -328,3 +353,4 @@ title: Blackjack
       }
       return 0;
   }
+</script>
