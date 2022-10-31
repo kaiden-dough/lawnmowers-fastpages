@@ -179,6 +179,9 @@ function reset(){
         dealercard.removeChild(dealercard.lastChild);
         dealernum = dealercard.childElementCount; 
     }       
+    let cardImg = document.getElementById("hidden");
+    cardImg.src = "http://kaiden-dough.github.io/lawnmowers-fastpages//images/cards/BACK.png";
+
     playercard = document.getElementById('your-cards');
     playernum = playercard.childElementCount;
     while(playernum != 0){
