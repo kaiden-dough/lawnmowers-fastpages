@@ -80,7 +80,7 @@ window.onload = wrap_img;
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/lawnmowers-fastpages/about/">About Us</a><a class="page-link" href="/lawnmowers-fastpages/blackjack/">Blackjack</a><a class="page-link" href="/lawnmowers-fastpages/pong/">Pong</a></div>
+        <div class="trigger"><a class="page-link" href="/lawnmowers-fastpages/about/">About Us</a><a class="page-link" href="/lawnmowers-fastpages/blackjack/">Blackjack</a><a class="page-link" href="/lawnmowers-fastpages/jokebox/">Jokebox</a><a class="page-link" href="/lawnmowers-fastpages/pong/">Pong</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
@@ -103,9 +103,8 @@ window.onload = wrap_img;
     </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <body style="background-color:green;"> <!-- green background and title -->
+    <body style="background-image: radial-gradient(circle, green 50%, green);">
     <div class="px-5 py-5 mx-auto">
-        <h1 style="color:white;"><strong>Blackjack</strong></h1>
     </div>
 </body>
 
@@ -153,7 +152,7 @@ window.onload = wrap_img;
       </h2>
       <!-- dealer's cards -->
       <div id="dealer-cards">
-          <img id="hidden" src="/lawnmowers-fastpages//images/BACK.png">
+          <img id="hidden" src="/lawnmowers-fastpages//images/cards/BACK.png">
       </div>
 
       <br>
@@ -293,7 +292,7 @@ window.onload = wrap_img;
           let cardImg = document.createElement("img");
           let card = deck.pop();
           console.log("Dealer:"+card);
-          test = ("/lawnmowers-fastpages//images/"+card+".png");
+          test = ("/lawnmowers-fastpages//images/cards/"+card+".png");
           add = "{"+test+"}";
           console.log(JSON.stringify(add));
           cardImg.src = (JSON.stringify(add));
@@ -307,7 +306,7 @@ window.onload = wrap_img;
           let cardImg = document.createElement("img");
           let card = deck.pop();
           console.log("Player:"+card);
-          test = ("/lawnmowers-fastpages//images/"+card+".png");
+          test = ("/lawnmowers-fastpages//images/cards/"+card+".png");
           add = "{"+test+"}";
           console.log(JSON.stringify(add));
           cardImg.src = (JSON.stringify(add));
@@ -332,7 +331,7 @@ window.onload = wrap_img;
           let cardImg = document.createElement("img");
           let card = deck.pop();
           console.log("Player:"+card);
-          test = ("/lawnmowers-fastpages//images/"+card+".png");
+          test = ("/lawnmowers-fastpages//images/cards/"+card+".png");
           add = "{"+test+"}";
           console.log(JSON.stringify(add));
           cardImg.src = (JSON.stringify(add));
@@ -355,7 +354,7 @@ window.onload = wrap_img;
           let card = deck.pop();
           console.log("Dealer:"+card);
           console.log(card);            
-          test = ("/lawnmowers-fastpages//images/"+card+".png");
+          test = ("/lawnmowers-fastpages//images/cards/"+card+".png");
           add = "{"+test+"}";
           console.log(JSON.stringify(add));
           cardImg.src = (JSON.stringify(add)); // did not work though, it kept on switching the symbols to ASCII symbols
@@ -371,7 +370,7 @@ window.onload = wrap_img;
       yourSum = reduceAce(yourSum, yourAce);
 
       canHit = false;
-      document.getElementById("hidden").src = "/lawnmowers-fastpages//images/"+hidden+".png";
+      document.getElementById("hidden").src = "/lawnmowers-fastpages//images/cards/"+hidden+".png";
 
       let message = "";
       if (yourSum > 21) { //over 21 u lose

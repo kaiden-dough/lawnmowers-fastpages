@@ -4,22 +4,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Lawnmowers Arcade | Come in and have fun.</title>
+<title>Jokebox | Lawnmowers Arcade</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Lawnmowers Arcade" />
+<meta property="og:title" content="Jokebox" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Come in and have fun." />
 <meta property="og:description" content="Come in and have fun." />
-<link rel="canonical" href="https://kaiden-dough.github.io/lawnmowers-fastpages/" />
-<meta property="og:url" content="https://kaiden-dough.github.io/lawnmowers-fastpages/" />
+<link rel="canonical" href="https://kaiden-dough.github.io/lawnmowers-fastpages/jokebox/" />
+<meta property="og:url" content="https://kaiden-dough.github.io/lawnmowers-fastpages/jokebox/" />
 <meta property="og:site_name" content="Lawnmowers Arcade" />
-<meta property="og:image" content="https://kaiden-dough.github.io/lawnmowers-fastpages/images/logo.png" />
 <meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="https://kaiden-dough.github.io/lawnmowers-fastpages/images/logo.png" />
-<meta property="twitter:title" content="Lawnmowers Arcade" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Jokebox" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"Come in and have fun.","headline":"Lawnmowers Arcade","image":"https://kaiden-dough.github.io/lawnmowers-fastpages/images/logo.png","name":"Lawnmowers Arcade","url":"https://kaiden-dough.github.io/lawnmowers-fastpages/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Come in and have fun.","headline":"Jokebox","url":"https://kaiden-dough.github.io/lawnmowers-fastpages/jokebox/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/lawnmowers-fastpages/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://kaiden-dough.github.io/lawnmowers-fastpages/feed.xml" title="Lawnmowers Arcade" /><link rel="shortcut icon" type="image/x-icon" href="/lawnmowers-fastpages/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -87,98 +85,82 @@ window.onload = wrap_img;
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home"><html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<style>
-      h3 {color:rgb(255, 255, 255); font-family: brush script mt; font-size: 30px;}
-    .neonText {
-        color: #fff;
-        text-shadow:
-            0 0 7px #fff,
-            0 0 10px #fff,
-            0 0 21px #fff,
-            0 0 42px rgb(255, 0, 0),
-            0 0 82px rgb(255, 0, 0),
-            0 0 92px rgb(255, 0, 0),
-            0 0 102px rgb(255, 0, 0),
-            0 0 151px rgb(255, 0, 0);
-      }
-              
-      body {
-        font-size: 18px;
-        background-color: #010a01;
-      }  
-      
-      h1, h2 {
-        text-align: center;
-        text-transform: uppercase;
-        font-weight: 400;
-      }
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Jokebox</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="" itemprop="datePublished">
         
-      h1 {
-          font-size: 4.2rem;
-      }
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
+
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <html>
+    <head>
+        <style>
+        h1 {
+          border: 5px solid rgb(0, 0, 0);
+          padding: 20px;
+          text-align: center;
+          color: #356d22;
+        }
+
+        button {
+            background-color: #356d22;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            display: block;
+            font-size: 50px;
+            cursor: pointer;
+            width: 900px;
+            padding: 10px
+        }
+
+        /* Green */
+        .success {
+            border-color: #04AA6D;
+        }
+
+        .success:hover {
+            background-color: #068959;
+            color: #ffffff;
+        }
+
+        </style>
+    </head>
+    <body>
+        <script>
+            fetch('https://lawnmowers.nighthawkcodescrums.gq/api/jokes/')
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+            console.log(response.json())
+            function displayJoke() {
+                document.getElementById("djb").innerHTML = "test";
+            }
+
+        </script>
         
-      h2 {
-          font-size: 1.8rem;
-      }
-      
-      .container {
-        margin-top: 20vh;
-      }                   
-      img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-      } 
-</style>
-</head>
-<body style="background-image: radial-gradient(circle, black 50%, green);">
-    <h1 class="neonText" style="font-family:brush script mt">
-        LAWNMOWERS ARCADE
-  </h1>
-  <img src="/lawnmowers-fastpages//images/me.gif" alt="m" height="400" />
-    <h2 class="neonText" style="font-family:brush script mt">
-        <b>
-            For   more   information   visit   the   "About"   page!
-        </b>
-    </h2>
-    <div class="parallax2"></div>
-    <h3>
-        <b>
-            Blogs
-        </b>
-    </h3>
-</body>
+        <div>
+    
+        
+        <button class="button success" onclick="displayJoke()">Play</button>
+
+        <p id="djb"></p>
+
+        </div>
+    </body>
 </html>
+  </div><a class="u-url" href="/lawnmowers-fastpages/jokebox/" hidden></a>
+</article>
 
-
-
-  
-
-  <!-- Hide posts if front matter flag hide:true -->
-  
-  
-
-  <!-- Sort posts by rank, then date -->
-  
-  
-  
-
- 
-  
-
-   <!-- Assemble final sorted posts array -->
-  
-  <ul class="post-list"><li><h3>
-    <a class="post-link" href="/lawnmowers-fastpages/2022/08/25/inspirationalquote.html">
-    Inspirational Quote
-    </a>
-</h3><p class="post-meta">Aug 25, 2022</p>
-</li></ul>
-
-    </div>
       </div>
     </main><footer class="site-footer h-card">
   <data class="u-url" href="/lawnmowers-fastpages/"></data>
