@@ -53,6 +53,9 @@ title: Blackjack
       <button class="button" id="up" width="100" height="50">+</button>
       <button class="button" id="down" width="100" height="50">-</button>
       <h2>
+      <button class="button" id="start" width="100" height="50">Start</button>
+      </h2>
+      <h2>
           Dealer: <span id="dealer-sum"><span>
       </h2>
       <!-- dealer's cards -->
@@ -103,6 +106,9 @@ title: Blackjack
   var playercard;
   var dealernum;
   var playernum;
+  var start = false;
+  var canReset = true;
+  var canStart = true;
   
   // load in functions, game set up
   window.onload = function() {
@@ -116,13 +122,17 @@ title: Blackjack
     deck;
     canHit = true;
     canBet = true;
+    start = false;
+    canReset = true;
+    canStart = true;
     document.getElementById("results").innerText = "";
     document.getElementById("dealer-sum").innerText = "";
     document.getElementById("your-sum").innerText = "";
     betFunction();
     buildDeck();
     shuffleDeck();
-    startGame();
+    
+    document.getElementById("start").addEventListener("click", startBut);
 }
 
 function betFunction() {
@@ -141,7 +151,7 @@ function up(){
     if (!canBet) {
         return;
     }
-    if ((canBet = true)){
+    if ((canBet)){
         bet = parseInt(bet) + 50
     }
     document.getElementById("bet").innerText = bet;
@@ -158,6 +168,9 @@ function down(){
 }
 
 function reset(){
+    if(!canReset){
+        return;
+    }
     //location.reload();
     dealerSum = 0;
     yourSum = 0;
@@ -168,6 +181,8 @@ function reset(){
     deck;
     canHit = true;
     canBet = true;
+    start = false;
+    canStart = true;
     document.getElementById("results").innerText = "";
     document.getElementById("dealer-sum").innerText = "";
     document.getElementById("your-sum").innerText = "";
@@ -190,9 +205,21 @@ function reset(){
     }    
     buildDeck();
     shuffleDeck();
-    startGame();
+    document.getElementById("start").addEventListener("click", startBut);
+    
 }
-
+  function startBut() {
+      if (!canStart) {
+        return;
+      }
+      canReset = false;
+      startGame();
+      
+      canBet = false;
+      console.log(canBet);
+      start = true;
+      canStart = false;
+  }
 
   // the deck, no shuffled
   function buildDeck() {
@@ -254,10 +281,8 @@ function reset(){
   }
 
   function hit() {
-      canBet = false;
-      console.log(canBet);
       //alert("hit") //see if the button works
-      if (!canHit) { //if cannot hit then it doesn't let you
+      if (!canHit || !start) { //if cannot hit then it doesn't let you
           return; 
       }
       else {
@@ -277,8 +302,9 @@ function reset(){
       console.log("Player:"+reduceAce(yourSum, yourAce));
   }
   function stand() {
-      canBet = true;
-      console.log(canBet);
+      if (!start) { //if cannot hit then it doesn't let you
+          return; 
+      }
       while (dealerSum < 17) { //dealer must keep hitting if sum is less than 17
           let cardImg = document.createElement("img"); // this was supposed to make new cards appear
           let card = deck.pop();
@@ -299,31 +325,36 @@ function reset(){
       document.getElementById("hidden").src = "http://kaiden-dough.github.io/lawnmowers-fastpages//images/cards/"+hidden+".png";
 
       let message = "";
-      if (yourSum > 21) { //over 21 u lose
-          message = "You Lose!";
-          score -= parseInt(bet);
-      }
-      else if (dealerSum > 21) { //dealer over, but you not u win
-          message = "You win!";
-          score += parseInt(bet);
-      }
-      else if (yourSum == dealerSum) { // if both equal 21, a tie
-          message = "Tie!";
-      }
-      else if (yourSum > dealerSum) { // not above or 21, and greater than dealer = u win
-          message = "You Win!";
-          score += parseInt(bet);
-      }
-      else if (yourSum < dealerSum) { // below dealer, u lose
-          message = "You Lose!";
-          score -= parseInt(bet);
-      }
-      console.log(message);
-      document.getElementById("dealer-sum").innerText = dealerSum; //display score and sums
-      document.getElementById("your-sum").innerText = yourSum;
-      document.getElementById("results").innerText = message;
-      document.getElementById("score").innerText = score;
+      end();
       //alert("stand") //see if the button works
+  }
+  
+  function end() {
+    if (yourSum > 21) { //over 21 u lose
+        message = "You Lose!";
+        score -= parseInt(bet);
+    }
+    else if (dealerSum > 21) { //dealer over, but you not u win
+        message = "You win!";
+        score += parseInt(bet);
+    }
+    else if (yourSum == dealerSum) { // if both equal 21, a tie
+        message = "Tie!";
+    }
+    else if (yourSum > dealerSum) { // not above or 21, and greater than dealer = u win
+        message = "You Win!";
+        score += parseInt(bet);
+    }
+    else if (yourSum < dealerSum) { // below dealer, u lose
+        message = "You Lose!";
+        score -= parseInt(bet);
+    }
+    console.log(message);
+    document.getElementById("dealer-sum").innerText = dealerSum; //display score and sums
+    document.getElementById("your-sum").innerText = yourSum;
+    document.getElementById("results").innerText = message;
+    document.getElementById("score").innerText = score;
+    canReset = true;
   }
 
   function reduceAce(sum, ace) {
