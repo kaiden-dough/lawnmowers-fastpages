@@ -63,8 +63,6 @@ donger = {
 	update: function() {
 		if (bong[WKey]) this.y -= 7;
 		if (bong[SKey]) this.y += 7;
-        if (bong[UKey]) this.y -= 7;
-		if (bong[DKey]) this.y += 7;
 		this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
 	},
 
@@ -73,9 +71,9 @@ donger = {
 	}
 },
 
-// ai
+// 2nd player
 
-ai = {
+dude = {
 	x: null,
 	y: null,
 
@@ -83,8 +81,8 @@ ai = {
 	height: 115,
 
 	update: function() {
-		var desty = holygrace.y - (this.height - holygrace.side)*0.5;
-		this.y += (desty - this.y) * 0.1;
+        if (bong[UKey]) this.y -= 7;
+		if (bong[DKey]) this.y += 7;
 		this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
 	},
 
@@ -112,7 +110,7 @@ holygrace = {
 	serve: function(side) {
 		// set the x and y position
 		var r = Math.random();
-		this.x = side===1 ? donger.x+donger.width : ai.x - this.side;
+		this.x = side===1 ? donger.x+donger.width : dude.x - this.side;
 		this.y = (HEIGHT - this.side)*r;
 		// calculating resultant angles
 		var phi = 0.1*pi*(1 - 2*r);
@@ -139,12 +137,12 @@ holygrace = {
 			return ax < bx+bw && ay < by+bh && bx < ax+aw && by < ay+ah;
 		};
 
-		var pdle = this.vel.x < 0 ? donger : ai;
+		var pdle = this.vel.x < 0 ? donger : dude;
 		if (AABBIntersect(pdle.x, pdle.y, pdle.width, pdle.height,
 				this.x, this.y, this.side, this.side)
 		) {	
 			// calculate resultant angle (reflection)
-			this.x = pdle===donger ? donger.x+donger.width : ai.x - this.side;
+			this.x = pdle===donger ? donger.x+donger.width : dude.x - this.side;
 			var n = (this.y+this.side - pdle.y)/(pdle.height+this.side);
 			var phi = 0.25*pi*(2*n - 1);
 			// update valocity
@@ -201,8 +199,8 @@ function init() {
 	donger.x = donger.width;
 	donger.y = (HEIGHT - donger.height)/2;
 
-	ai.x = WIDTH - (donger.width + ai.width);
-	ai.y = (HEIGHT - ai.height)/2;
+	dude.x = WIDTH - (donger.width + dude.width);
+	dude.y = (HEIGHT - dude.height)/2;
 
 	holygrace.serve(1);
 }
@@ -211,7 +209,7 @@ function init() {
 function update() {
 	holygrace.update();
 	donger.update();
-	ai.update();
+	dude.update();
 }
 
 // Clear canvas and draw all game objects and net
@@ -224,7 +222,7 @@ function draw() {
 
 	holygrace.draw();
 	donger.draw();
-	ai.draw();
+	dude.draw();
 
 	// vertical line in the middle
 	var w = 4;
