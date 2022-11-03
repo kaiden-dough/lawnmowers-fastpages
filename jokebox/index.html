@@ -115,7 +115,7 @@ window.onload = wrap_img;
         display: block;
         font-size: 50px;
         cursor: pointer;
-        width: 900px;
+        width: 880px;
         padding: 10px
     }
 
@@ -135,11 +135,9 @@ window.onload = wrap_img;
  <div>
   
       
-       <button class="button success" onclick="displayJoke()">Play</button>
+       <button id="select" onclick="myFunction()">Play</button>
  
        <p id="djb"></p>
-
-       <button onclick="myFunction()" id="select">Pick text</button>
       <div class="main">
        <p id="result"></p>
   </div>
@@ -153,34 +151,36 @@ window.onload = wrap_img;
   function myFunction() {
     idArray = new Array()
     idArray [1] = "If you give someone a program... you will frustrate them for a day; if you teach them how to program... you will frustrate them for a lifetime."
-    idArray [2] = "Why did I divide sin by tan? A: Just cos."
+    idArray [2] = "Why did I divide sin by tan? Just cos."
     idArray [3] = "UNIX is basically a simple operating system... but you have to be a genius to understand the simplicity."
     idArray [4] = "If at first you don't succeed; call it version 1.0."
     idArray [5] = "Java programmers are some of the most materialistic people I know, very object-oriented"
     idArray [6] = "The oldest computer can be traced back to Adam and Eve. It was an apple but with extremely limited memory. Just 1 byte. And then everything crashed."
     idArray [7] = "Why did Wi-Fi and the computer get married? A: Because they had a connection"
     idArray [8] = "Bill Gates teaches a kindergarten class to count to ten. 1, 2, 3, 3.1, 95, 98, ME, 2000, XP, Vista, 7, 8, 10."
-    idArray [9] = "Wha is a aliens favorite computer key? A: the space bar"
+    idArray [9] = "What is a aliens favorite computer key? The space bar"
     idArray [10] = "There are 10 types of people in the world: those who understand binary, and those who don't"
     idArray [11] = "If it wasn't for C, we'd all be programming in BASI and OBOL"
     idArray [12] = "Computers make very fast, very accurate mistakes."
-    idArray [13] = "a"
-    idArray [14] = "a"
-    idArray [15] = "a"
-    idArray [16] = "a"
-    idArray [17] = "a"
+    idArray [13] = "Why is it that programmers always confuse Halloween with Christmas? Because 31 OCT = 25 DEC."
+    idArray [14] = "How many programmers does it take to change a light bulb? None. It's a hardware problem."
+    idArray [15] = "The programmer got stuck in the shower because the instructions on the shampoo bottle said: Lather, Rinse, Repeat."
+    idArray [16] = "What is the biggest lie in the entire universe? I have read and agree to the Terms and Conditions."
+    idArray [17] = "An SQL statement walks into a bar and sees two tables. It approaches, and asks may I join you?"
 
 
 
     document.getElementById("select").onclick = myFunction;
-    randomParagraph = Math.floor(Math.random()*5);
+    randomParagraph = Math.floor(Math.random()*17);
 
     document.getElementById("result").innerHTML = idArray[randomParagraph + 1];       
+
+    function afterDisplay() {
+               document.getElementById("afdi").innerHTML = "test";
+           }
+
 }
 
-  function displayJoke() {
-    document.getElementById("djb").innerHTML = "test"; 
-  }
 
 </script>
 </html>
