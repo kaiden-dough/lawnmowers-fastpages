@@ -38,62 +38,117 @@ title: Jokebox
 
     </style>
 </head>
-
+<h3>Do you think Bob will think the joke is funny?</h3>
+<h2>BET: <span id="bet">100</span></h2>
+<h2>SCORE: <span id="score">0</span></h2>
+  </div>
+  
+  <button id="up">+</button>
+  <button id="down">-</button>
+  <br>
  <div>
   
-  <button id="select" onclick="displayJoke(); bobFunny();">Play</button>
-       
+  <button id="select">Play</button>
+ 
   <div class="main">
   <p id="result"></p>
 
-  </div>
- 
+  <button id="start">BOB</button>
+  <p id="resultb"></p>
+  <button id="reset">Reset</button>
 </div>
 
 <!-- Script is layed out in a sequence (without a function) and will execute when page is loaded -->
 <script>
-    
-    
+  var betnum=100;
+  var canBet = true;
+  var canPlay=false;
+  var canBob=false;
+  var score=0;
+  window.onload = function() {
+  betnum=100;
+  canBet = true;
+  canPlay=false;
+  canBob=false;
+  score=0;
+  document.getElementById("select").addEventListener("click", displayJoke);
+  document.getElementById("up").addEventListener("click", up);
+  document.getElementById("down").addEventListener("click", down);
+  document.getElementById("start").addEventListener("click", bobFunny);
+  document.getElementById("reset").addEventListener("click", reset);
+  }
+  function up(){
+    if(!canBet){
+      return;
+    }
+    betnum = parseInt(betnum) + 50
+    document.getElementById("bet").innerText = betnum;
+    canPlay=true;
+  }
+  function down(){
+    if(!canBet){
+      return;
+    }
+    else if ((parseInt(betnum)>50)){
+        betnum = parseInt(betnum) - 50
+    }
+    document.getElementById("bet").innerText = betnum;
+    canPlay=true;
+  }
   function displayJoke() {
+    if (!canPlay){
+      return;
+    }
     idArray = new Array()
-    idArray [1] = "If you give someone a program... you will frustrate them for a day; if you teach them how to program... you will frustrate them for a lifetime."
-    idArray [2] = "Why did I divide sin by tan? Just cos."
-    idArray [3] = "UNIX is basically a simple operating system... but you have to be a genius to understand the simplicity."
-    idArray [4] = "If at first you don't succeed; call it version 1.0."
-    idArray [5] = "Java programmers are some of the most materialistic people I know, very object-oriented"
-    idArray [6] = "The oldest computer can be traced back to Adam and Eve. It was an apple but with extremely limited memory. Just 1 byte. And then everything crashed."
-    idArray [7] = "Why did Wi-Fi and the computer get married? A: Because they had a connection"
-    idArray [8] = "Bill Gates teaches a kindergarten class to count to ten. 1, 2, 3, 3.1, 95, 98, ME, 2000, XP, Vista, 7, 8, 10."
-    idArray [9] = "What is a aliens favorite computer key? The space bar"
-    idArray [10] = "There are 10 types of people in the world: those who understand binary, and those who don't"
-    idArray [11] = "If it wasn't for C, we'd all be programming in BASI and OBOL"
-    idArray [12] = "Computers make very fast, very accurate mistakes."
-    idArray [13] = "Why is it that programmers always confuse Halloween with Christmas? Because 31 OCT = 25 DEC."
-    idArray [14] = "How many programmers does it take to change a light bulb? None. It's a hardware problem."
-    idArray [15] = "The programmer got stuck in the shower because the instructions on the shampoo bottle said: Lather, Rinse, Repeat."
-    idArray [16] = "What is the biggest lie in the entire universe? I have read and agree to the Terms and Conditions."
-    idArray [17] = "An SQL statement walks into a bar and sees two tables. It approaches, and asks may I join you?"
-
-
-
-    document.getElementById("select").onclick = displayJoke;
-    randomParagraph = Math.floor(Math.random()*17);
+    idArray [1] = "What’s the best thing about Switzerland? I don’t know, but the flag is a big plus."
+    idArray [2] = "I invented a new word! Plagiarism"
+    idArray [3] = "Why do we tell actors to “break a leg?”. Because every play has a cast."
+    idArray [4] = "Hear about the new restaurant called Karma? There’s no menu: You get what you deserve."
+    idArray [5] = "A woman in labor suddenly shouted, “Shouldn’t! Wouldn’t! Couldn’t! Didn’t! Can’t!” “Don’t worry,” said the doc. “Those are just contractions.”"
+    idArray [6] = "Did you hear about the actor who fell through the floorboards? He was just going through a stage"
+    idArray [7] = "Did you hear about the claustrophobic astronaut? He just needed a little space."
+    idArray [8] = "Why don’t scientists trust atoms? Because they make up everything."
+    idArray [9] = "Where are average things manufactured? The satisfactory."
+    idArray [10] = "How do you drown a hipster? Throw him in the mainstream."
+    randomParagraph = Math.floor(Math.random()*10);
 
     document.getElementById("result").innerHTML = idArray[randomParagraph + 1]; 
+    canBet=false;
+    canPlay=false;
+    canBob=true;
 
-
-}
-
+  }
   function bobFunny() {
+    if (!canBob){
+      return;
+    }
     idArray = new Array()
     idArray [1] = "Bob thinks it's funny"
     idArray [2] = "Bob doesn't think it's funny"
     
 
-    document.getElementById("selectb").onclick = bobFunny;
     randomParagraph = Math.floor(Math.random()*2);
-
+    console.log(randomParagraph);
     document.getElementById("resultb").innerHTML = idArray[randomParagraph + 1]; 
+    canBob = false;
+    if (randomParagraph==0) { // below dealer, u lose
+        message = "You Win!";
+        score += parseInt(betnum);
+    }
+    else if (randomParagraph==1) { // below dealer, u lose
+        message = "You Lose!";
+        score -= parseInt(betnum);
+    }
+    document.getElementById("score").innerText = score;
+    canReset=true;
+}
+function reset(){
+  canBet = true;
+  canPlay=false;
+  canBob=false;
+  canReset=false;
+  document.getElementById("result").innerHTML = "";
+  document.getElementById("resultb").innerHTML = "";
 }
 </script>
 </html>
