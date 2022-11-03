@@ -146,8 +146,6 @@ ctx,
 bong,
 
 donger = {
-	x: null,
-	y: null,
 
 	width:  20,
 	height: 100,
@@ -168,8 +166,6 @@ donger = {
 // 2nd player
 
 dude = {
-	x: null,
-	y: null,
 
 	width:  20,
 	height: 115,
@@ -188,18 +184,12 @@ dude = {
 // ball
 
 holygrace = {
-	x:   null,
-	y:   null,
-	vel: null,
 
 	side:  20,
 	speed: 10,
 
-	/**
-	 * Serves the ball towards the specified side
-	 * 
+	/** ball direction
 	 * @param  {number} side 1 right
-	 *                       -1 left
 	 */
 	serve: function(side) {
 		// set the x and y position
