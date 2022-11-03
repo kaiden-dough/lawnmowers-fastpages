@@ -100,11 +100,11 @@ function loop() {
   }
 
   // draw apple
-  context.fillStyle = 'red';
+  context.fillStyle = 'violet';
   context.fillRect(apple.x, apple.y, grid-1, grid-1);
 
   // draw snake one cell at a time
-  context.fillStyle = 'green';
+  context.fillStyle = 'aqua';
   snake.cells.forEach(function(cell, index) {
     
     // drawing 1 px smaller than the grid creates a grid effect in the snake body so you can see how long it is
@@ -146,22 +146,22 @@ document.addEventListener('keydown', function(e) {
   // shouldn't let you collide with your own body)
   
   // left arrow key
-  if (e.which === 37 && snake.dx === 0) {
+  if ((e.which === 37 || e.which === 65) && snake.dx === 0) {
     snake.dx = -grid;
     snake.dy = 0;
   }
   // up arrow key
-  else if (e.which === 38 && snake.dy === 0) {
+  else if ((e.which === 38 || e.which === 87) && snake.dy === 0) {
     snake.dy = -grid;
     snake.dx = 0;
   }
   // right arrow key
-  else if (e.which === 39 && snake.dx === 0) {
+  else if ((e.which === 39 || e.which === 68) && snake.dx === 0) {
     snake.dx = grid;
     snake.dy = 0;
   }
   // down arrow key
-  else if (e.which === 40 && snake.dy === 0) {
+  else if ((e.which === 40 || e.which === 83) && snake.dy === 0) {
     snake.dy = grid;
     snake.dx = 0;
   }
