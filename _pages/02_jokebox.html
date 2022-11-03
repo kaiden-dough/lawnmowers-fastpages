@@ -62,13 +62,11 @@ title: Jokebox
 <script>
   var betnum=100;
   var canBet = true;
-  var canPlay=false;
   var canBob=false;
   var score=0;
   window.onload = function() {
   betnum=100;
   canBet = true;
-  canPlay=false;
   canBob=false;
   score=0;
   document.getElementById("select").addEventListener("click", displayJoke);
@@ -83,7 +81,6 @@ title: Jokebox
     }
     betnum = parseInt(betnum) + 50
     document.getElementById("bet").innerText = betnum;
-    canPlay=true;
   }
   function down(){
     if(!canBet){
@@ -93,12 +90,8 @@ title: Jokebox
         betnum = parseInt(betnum) - 50
     }
     document.getElementById("bet").innerText = betnum;
-    canPlay=true;
   }
   function displayJoke() {
-    if (!canPlay){
-      return;
-    }
     idArray = new Array()
     idArray [1] = "What’s the best thing about Switzerland? I don’t know, but the flag is a big plus."
     idArray [2] = "I invented a new word! Plagiarism"
@@ -114,7 +107,6 @@ title: Jokebox
 
     document.getElementById("result").innerHTML = idArray[randomParagraph + 1]; 
     canBet=false;
-    canPlay=false;
     canBob=true;
 
   }
@@ -144,7 +136,6 @@ title: Jokebox
 }
 function reset(){
   canBet = true;
-  canPlay=false;
   canBob=false;
   canReset=false;
   document.getElementById("result").innerHTML = "";
