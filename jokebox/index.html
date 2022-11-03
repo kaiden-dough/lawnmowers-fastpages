@@ -134,21 +134,20 @@ window.onload = wrap_img;
 
  <div>
   
-      
-       <button id="select" onclick="myFunction()">Play</button>
- 
-       <p id="djb"></p>
-      <div class="main">
-       <p id="result"></p>
+  <button id="select" onclick="displayJoke(); bobFunny();">Play</button>
+       
+  <div class="main">
+  <p id="result"></p>
+
   </div>
  
 </div>
 
 <!-- Script is layed out in a sequence (without a function) and will execute when page is loaded -->
 <script>
-
-
-  function myFunction() {
+    
+    
+  function displayJoke() {
     idArray = new Array()
     idArray [1] = "If you give someone a program... you will frustrate them for a day; if you teach them how to program... you will frustrate them for a lifetime."
     idArray [2] = "Why did I divide sin by tan? Just cos."
@@ -170,18 +169,25 @@ window.onload = wrap_img;
 
 
 
-    document.getElementById("select").onclick = myFunction;
+    document.getElementById("select").onclick = displayJoke;
     randomParagraph = Math.floor(Math.random()*17);
 
-    document.getElementById("result").innerHTML = idArray[randomParagraph + 1];       
+    document.getElementById("result").innerHTML = idArray[randomParagraph + 1]; 
 
-    function afterDisplay() {
-               document.getElementById("afdi").innerHTML = "test";
-           }
 
 }
 
+  function bobFunny() {
+    idArray = new Array()
+    idArray [1] = "Bob thinks it's funny"
+    idArray [2] = "Bob doesn't think it's funny"
+    
 
+    document.getElementById("selectb").onclick = bobFunny;
+    randomParagraph = Math.floor(Math.random()*2);
+
+    document.getElementById("resultb").innerHTML = idArray[randomParagraph + 1]; 
+}
 </script>
 </html>
   </div><a class="u-url" href="/lawnmowers-fastpages/jokebox/" hidden></a>
