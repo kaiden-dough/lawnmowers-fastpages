@@ -49,7 +49,7 @@
   
       ,"page3": {
           "title": "Snake",
-          "content": "&lt;!DOCTYPE html&gt; . . .",
+          "content": "&lt;!DOCTYPE html&gt; . . &lt;/html&gt; .",
           "url": "https://kaiden-dough.github.io/lawnmowers-fastpages/snake/",
           "relUrl": "/snake/",
           "date": ""
