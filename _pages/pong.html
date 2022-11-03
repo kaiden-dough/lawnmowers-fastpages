@@ -49,9 +49,9 @@ SKey = 83,
 
 canvas,
 ctx,
-keystate,
+bong,
 
-player = {
+donger = {
 	x: null,
 	y: null,
 
@@ -61,10 +61,10 @@ player = {
 	// hotkeys
 
 	update: function() {
-		if (keystate[WKey]) this.y -= 7;
-		if (keystate[SKey]) this.y += 7;
-        if (keystate[UKey]) this.y -= 7;
-		if (keystate[DKey]) this.y += 7;
+		if (bong[WKey]) this.y -= 7;
+		if (bong[SKey]) this.y += 7;
+        if (bong[UKey]) this.y -= 7;
+		if (bong[DKey]) this.y += 7;
 		this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
 	},
 
@@ -83,7 +83,7 @@ ai = {
 	height: 115,
 
 	update: function() {
-		var desty = ball.y - (this.height - ball.side)*0.5;
+		var desty = holygrace.y - (this.height - holygrace.side)*0.5;
 		this.y += (desty - this.y) * 0.1;
 		this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
 	},
@@ -95,7 +95,7 @@ ai = {
 
 // ball
 
-ball = {
+holygrace = {
 	x:   null,
 	y:   null,
 	vel: null,
@@ -112,7 +112,7 @@ ball = {
 	serve: function(side) {
 		// set the x and y position
 		var r = Math.random();
-		this.x = side===1 ? player.x+player.width : ai.x - this.side;
+		this.x = side===1 ? donger.x+donger.width : ai.x - this.side;
 		this.y = (HEIGHT - this.side)*r;
 		// calculating resultant angles
 		var phi = 0.1*pi*(1 - 2*r);
@@ -139,24 +139,24 @@ ball = {
 			return ax < bx+bw && ay < by+bh && bx < ax+aw && by < ay+ah;
 		};
 
-		var pdle = this.vel.x < 0 ? player : ai;
+		var pdle = this.vel.x < 0 ? donger : ai;
 		if (AABBIntersect(pdle.x, pdle.y, pdle.width, pdle.height,
 				this.x, this.y, this.side, this.side)
 		) {	
 			// calculate resultant angle (reflection)
-			this.x = pdle===player ? player.x+player.width : ai.x - this.side;
+			this.x = pdle===donger ? donger.x+donger.width : ai.x - this.side;
 			var n = (this.y+this.side - pdle.y)/(pdle.height+this.side);
 			var phi = 0.25*pi*(2*n - 1);
 			// update valocity
 			var smash = Math.abs(phi) > 0.2*pi ? 1.5 : 1;
-			this.vel.x = smash*(pdle===player ? 1 : -1)*this.speed*Math.cos(phi);
+			this.vel.x = smash*(pdle===donger ? 1 : -1)*this.speed*Math.cos(phi);
 			this.vel.y = smash*this.speed*Math.sin(phi);
 		}
 
 		// reset the ball when ball outside of the canvas in the
 		// x direction
 		if (0 > this.x+this.side || this.x > WIDTH) {
-			this.serve(pdle===player ? 1 : -1);
+			this.serve(pdle===donger ? 1 : -1);
 		}
 	},
 
@@ -175,13 +175,13 @@ function main() {
 	ctx = canvas.getContext("2d");
 	document.body.appendChild(canvas);
 
-	keystate = {};
+	bong = {};
 	// keep track of keyboard presses
 	document.addEventListener("keydown", function(evt) {
-		keystate[evt.keyCode] = true;
+		bong[evt.keyCode] = true;
 	});
 	document.addEventListener("keyup", function(evt) {
-		delete keystate[evt.keyCode];
+		delete bong[evt.keyCode];
 	});
 
 	init(); // initiate game objects
@@ -198,19 +198,19 @@ function main() {
 
 // set start positions
 function init() {
-	player.x = player.width;
-	player.y = (HEIGHT - player.height)/2;
+	donger.x = donger.width;
+	donger.y = (HEIGHT - donger.height)/2;
 
-	ai.x = WIDTH - (player.width + ai.width);
+	ai.x = WIDTH - (donger.width + ai.width);
 	ai.y = (HEIGHT - ai.height)/2;
 
-	ball.serve(1);
+	holygrace.serve(1);
 }
 
 // update the entire game
 function update() {
-	ball.update();
-	player.update();
+	holygrace.update();
+	donger.update();
 	ai.update();
 }
 
@@ -222,8 +222,8 @@ function draw() {
 
 	ctx.fillStyle = "#0000ff";
 
-	ball.draw();
-	player.draw();
+	holygrace.draw();
+	donger.draw();
 	ai.draw();
 
 	// vertical line in the middle
