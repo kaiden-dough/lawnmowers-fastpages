@@ -2,7 +2,7 @@
   
     
         "post0": {
-            "title": "Title",
+            "title": "API Sample",
             "content": "import random rate_data = [] rate_list = [ &quot;Was Pong fun?&quot;, &quot;Was Blackjack fun?&quot;, &quot;Was Snake fun?&quot;, &#39;Was the Jokebox fun?&#39; ] # Initialize True False def initRate(): # setup jokes into a dictionary with id, trfa, true, false item_id = 0 for item in rate_list: rate_data.append({&quot;id&quot;: item_id, &quot;rate&quot;: item, &quot;yes&quot;: 0, &quot;no&quot;: 0}) item_id += 1 # Return all jokes from jokes_data def getRates(): return(rate_data) # Joke getter def getRate(id): return(rate_data[id]) # Return random joke from jokes_data def getRandomRate(): return(random.choice(rate_data)) def getPongRate(): return(rate_data[0]) def getBlackjackRate(): return(rate_data[1]) def getSnakeRate(): return(rate_data[2]) def getJokeboxRate(): return(rate_data[3]) # Liked joke def favoriteRate(): best = 0 bestID = -1 for rate in getRates(): if rate[&#39;yes&#39;] &gt; best: best = rate[&#39;yes&#39;] bestID = rate[&#39;id&#39;] return rate_data[bestID] # Jeered joke def worstRate(): worst = 0 worstID = -1 for rate in getRates(): if rate[&#39;no&#39;] &gt; worst: worst = rate[&#39;no&#39;] worstID = rate[&#39;id&#39;] return rate_data[worstID] # Add to haha for requested id def addRateYes(id): rate_data[id][&#39;yes&#39;] = rate_data[id][&#39;yes&#39;] + 1 return rate_data[id][&#39;yes&#39;] # Add to boohoo for requested id def addRateNo(id): rate_data[id][&#39;no&#39;] = rate_data[id][&#39;no&#39;] + 1 return rate_data[id][&#39;no&#39;] # Pretty Print joke def printRate(rate): print(rate[&#39;id&#39;], rate[&#39;rate&#39;], &quot; n&quot;, &quot;yes:&quot;, rate[&#39;yes&#39;], &quot; n&quot;, &quot;no:&quot;, rate[&#39;no&#39;], &quot; n&quot;) # Number of jokes def countRate(): return len(rate_data) # Test Joke Model if __name__ == &quot;__main__&quot;: initRate() # initialize jokes # Most likes and most jeered best = favoriteRate() print(&quot;Most liked&quot;, best[&#39;yes&#39;]) printRate(best) worst = worstRate() print(&quot;Most disliked&quot;, worst[&#39;no&#39;]) printRate(worst) # Random joke print(&quot;Random Game Rating&quot;) printRate(getRandomRate()) # Count of Jokes print(&quot;Rate Count: &quot; + str(countRate())) printRate(getPongRate()) printRate(getBlackjackRate()) printRate(getSnakeRate()) printRate(getJokeboxRate()) . Most liked 0 3 Was the Jokebox fun? yes: 0 no: 0 Most disliked 0 3 Was the Jokebox fun? yes: 0 no: 0 Random Game Rating 3 Was the Jokebox fun? yes: 0 no: 0 Rate Count: 4 0 Was Pong fun? yes: 0 no: 0 1 Was Blackjack fun? yes: 0 no: 0 2 Was Snake fun? yes: 0 no: 0 3 Was the Jokebox fun? yes: 0 no: 0 .",
             "url": "https://kaiden-dough.github.io/lawnmowers-fastpages/2022/11/01/api.html",
             "relUrl": "/2022/11/01/api.html",
@@ -90,6 +90,14 @@
   
 
   
+      ,"page9": {
+          "title": "Snake",
+          "content": "&lt;!DOCTYPE html&gt; . . .",
+          "url": "https://kaiden-dough.github.io/lawnmowers-fastpages/snake/",
+          "relUrl": "/snake/",
+          "date": ""
+      }
+      
   
 
   
@@ -99,7 +107,10 @@
   
 
   
-      ,"page12": {
+  
+
+  
+      ,"page13": {
           "title": "",
           "content": "Sitemap: {{ “sitemap.xml” | absolute_url }} | .",
           "url": "https://kaiden-dough.github.io/lawnmowers-fastpages/robots.txt",
