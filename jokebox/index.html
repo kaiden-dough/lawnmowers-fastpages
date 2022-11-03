@@ -103,20 +103,50 @@ window.onload = wrap_img;
     <style>
     h1 {
       border: 5px solid rgb(0, 0, 0);
-      padding: 20px;
+      padding: 15px;
       text-align: center;
       color: #356d22;
     }
 
-    button {
-        background-color: #356d22;
+    h2 {
+      border: double rgb(75, 75, 75);
+      padding: 15px;
+      text-align: center;
+      color: #ffffff;
+      padding: 15px;
+      width: 300px;
+    }
+
+    .button {
+        border-color: #356d22;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        font-size: 35px;
+        cursor: pointer;
+        width: 880px;
+        padding: 8px
+    }
+
+    .buttonbu {
+        border-color: #0a9920;
         color: rgb(255, 255, 255);
         text-align: center;
         display: block;
-        font-size: 50px;
+        font-size: 35px;
         cursor: pointer;
-        width: 880px;
-        padding: 10px
+        width: 150px;
+        padding: 7.5px
+    }
+
+    .buttonbd {
+        border-color: #b50a0a;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        display: block;
+        font-size: 35px;
+        cursor: pointer;
+        width: 150px;
+        padding: 7.5px
     }
 
     /* Green */
@@ -129,19 +159,34 @@ window.onload = wrap_img;
         color: #ffffff;
     }
 
+
     </style>
 </head>
-<h3>Do you think Bob will think the joke is funny?</h3>
-<h2>BET: <span id="bet">100</span></h2>
-<h2>SCORE: <span id="score">0</span></h2>
-  </div>
-  
-  <button id="up">+</button>
-  <button id="down">-</button>
+
+<button class="button" id="select">Play</button>
+<img src="/lawnmowers-fastpages//images/bobmower.png" alt="Girl in a jacket" width="300" height="300">
+
+<!--Bet and Score Display --> 
+<div style = "position:absolute; text-align: center; right:260px; top:300px;">
+<h2>
+  BET: <span id="bet">100</span><br>
+  SCORE: <span id="score">0</span>
+</h2>
+</div>
+
+<!-- Bet up button --> 
+<div style = "position:absolute; text-align: center; left:900px; top:500px;">
+  Increase Bet
+  <button class="buttonbu" id="up">+</button>
+</div>
+<!-- Bet down button --> 
+<div style = "position:absolute; text-align: center; left:1100px; top:500px;">
+  Decrease Bet
+  <button class="buttonbd" id="down">-</button>
+</div>
+
   <br>
  <div>
-  
-  <button id="select">Play</button>
  
   <div class="main">
   <p id="result"></p>

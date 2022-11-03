@@ -38,7 +38,7 @@
   
       ,"page2": {
           "title": "Jokebox",
-          "content": ". Do you think Bob will think the joke is funny? . BET: 100 . SCORE: 0 . &lt;/div&gt; + - Play . BOB . Reset &lt;/html&gt; .",
+          "content": ". Play BET: 100 SCORE: 0 . Increase Bet + Decrease Bet - . BOB . Reset &lt;/html&gt; .",
           "url": "https://kaiden-dough.github.io/lawnmowers-fastpages/jokebox/",
           "relUrl": "/jokebox/",
           "date": ""
