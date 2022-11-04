@@ -165,12 +165,12 @@ window.onload = wrap_img;
 
 <button class="button" id="select">Play</button>
 
-<div style = "position:absolute; left:260px; top:300px;">
+<div style = "position:absolute; left:575px; bottom:190px;">
 <img src="/lawnmowers-fastpages//images/farmer.png" alt="bobfarmer" width="300" height="300">
 </div>
 
 <!--Bet and Score Display --> 
-<div style = "position:absolute; text-align: center; right:260px; top:300px;">
+<div style = "position:absolute; text-align: center; right:225px; top:320px;">
 <h2>
   BET: <span id="bet">100</span><br>
   SCORE: <span id="score">0</span>
@@ -193,14 +193,15 @@ window.onload = wrap_img;
 <div class="main">
 <p id="result"></p>
 
-<div style = "position:absolute; text-align: center; left:200px; bottom: 300px;">
+<div style = "position:absolute; text-align: center; left:330px; bottom: 350px;">
 <button id="start">Will Bob think this is funny?</button>
+<p id="resultb"></p>
+</div>
+
+<div style = "position:absolute; text-align: center; left:400px; bottom: 300px;">
 <p id="resultb"></p>
 <button id="reset">Reset</button>
 </div>
-
-<p id="resultb"></p>
-<button id="reset">Reset</button>
 
 <!-- Script is layed out in a sequence (without a function) and will execute when page is loaded -->
 <script>
@@ -241,13 +242,12 @@ window.onload = wrap_img;
     idArray [2] = "I invented a new word! Plagiarism"
     idArray [3] = "Why do we tell actors to “break a leg?”. Because every play has a cast."
     idArray [4] = "Hear about the new restaurant called Karma? There’s no menu: You get what you deserve."
-    idArray [5] = "A woman in labor suddenly shouted, “Shouldn’t! Wouldn’t! Couldn’t! Didn’t! Can’t!” “Don’t worry,” said the doc. “Those are just contractions.”"
-    idArray [6] = "Did you hear about the actor who fell through the floorboards? He was just going through a stage"
-    idArray [7] = "Did you hear about the claustrophobic astronaut? He just needed a little space."
-    idArray [8] = "Why don’t scientists trust atoms? Because they make up everything."
-    idArray [9] = "Where are average things manufactured? The satisfactory."
-    idArray [10] = "How do you drown a hipster? Throw him in the mainstream."
-    randomParagraph = Math.floor(Math.random()*10);
+    idArray [5] = "Did you hear about the actor who fell through the floorboards? He was just going through a stage"
+    idArray [6] = "Did you hear about the claustrophobic astronaut? He just needed a little space."
+    idArray [7] = "Why don’t scientists trust atoms? Because they make up everything."
+    idArray [8] = "Where are average things manufactured? The satisfactory."
+    idArray [9] = "How do you drown a hipster? Throw him in the mainstream."
+    randomParagraph = Math.floor(Math.random()*9);
 
     document.getElementById("result").innerHTML = idArray[randomParagraph + 1]; 
     canBet=false;
@@ -287,9 +287,7 @@ function reset(){
 }
 </script>
 
-<div style = "position:absolute; text-align: center; left:200px; bottom: 100px;">
-  <h3>Instructions</h3>
-</div>
+
 
 </html>
   </div><a class="u-url" href="/lawnmowers-fastpages/jokebox/" hidden></a>
